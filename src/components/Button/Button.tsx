@@ -1,30 +1,33 @@
-import { ReactNode } from 'react';
-import Button from '@mui/material/Button';
+import { CSSProperties, ReactNode } from 'react';
+import Ripple from 'material-ripple-effects';
 
 interface ButtonProps {
     action: () => void;
     children?: ReactNode;
     className?: string;
-    variant?: 'text' | 'contained' | 'outlined';
     disabled?: true | false;
+    style?: CSSProperties;
 }
 const ButtonMaterial = ({
     action,
-    variant = 'contained',
     children,
     className,
     disabled = false,
+    style,
 }: ButtonProps) => {
+    const ripple = new Ripple();
+
     return (
         <>
-            <Button
+            <button
+                onMouseUp={(e) => ripple.create(e, 'light')}
+                style={style}
                 disabled={disabled}
-                variant={variant}
                 className={`${className}`}
                 onClick={action}
             >
                 {children}
-            </Button>
+            </button>
         </>
     );
 };

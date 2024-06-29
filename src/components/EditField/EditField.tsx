@@ -30,14 +30,14 @@ const EditField = ({ text = 'Your title', className }: EditFieldProps) => {
                 <div className="flex items-center w-full">
                     <h1
                         style={{ wordBreak: 'break-all' }}
-                        className={`bg-lime-300 text-center break-words w-full break-all${className}`}
+                        className={`ext-center break-words w-full break-all${className}`}
                     >
                         {title}
                     </h1>
                 </div>
                 <div className="flex">
                     <RiEdit2Fill
-                        className={'text-lime-600 cursor-pointer text-2xl '}
+                        className={'cursor-pointer text-2xl '}
                         onClick={handleTitleClick}
                     />
                 </div>
