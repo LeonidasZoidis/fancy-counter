@@ -20,6 +20,19 @@ const Counter = () => {
         new Audio(clickSoundResetFile)
     );
 
+    const dynamicCountSize = () => {
+        switch (true) {
+            case count > 999999:
+                return '5rem';
+            case count > 99999:
+                return '6rem';
+            case count > 999:
+                return '10rem';
+            default:
+                return '13rem';
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem('storedCount', JSON.stringify(count));
     }, [count]);
@@ -69,10 +82,10 @@ const Counter = () => {
                 </h1>
                 <div className="flex flex-col items-center justify-center flex-grow">
                     <div
-                        style={{ fontSize: '15rem' }}
-                        className="font-medium text-lime-900"
+                        style={{ fontSize: `${dynamicCountSize()}` }}
+                        className={`font-medium text-lime-900`}
                     >
-                        {count}
+                        {count.toLocaleString()}
                     </div>
                 </div>
                 <div className="flex flex-col items-center w-full">
