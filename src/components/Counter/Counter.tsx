@@ -9,25 +9,48 @@ import EditField from '../EditField/EditField';
 const Counter = () => {
     const randomColours = () => {
         const colourPairs = [
-            { bg: 'bg-red-300', el: 'bg-red-900', text: 'text-red-600' },
+            {
+                bg: 'bg-red-300',
+                el: 'bg-red-900',
+                text: 'text-red-600',
+                clicked: 'bg-red-500',
+            },
             {
                 bg: 'bg-yellow-300',
                 el: 'bg-yellow-900',
                 text: 'text-yellow-600',
+                clicked: 'bg-yellow-500',
             },
-            { bg: 'bg-green-300', el: 'bg-green-900', text: 'text-green-600' },
-            { bg: 'bg-blue-300', el: 'bg-blue-900', text: 'text-blue-600' },
+            {
+                bg: 'bg-green-300',
+                el: 'bg-green-900',
+                text: 'text-green-600',
+                clicked: 'bg-green-500',
+            },
+            {
+                bg: 'bg-blue-300',
+                el: 'bg-blue-900',
+                text: 'text-blue-600',
+                clicked: 'bg-blue-500',
+            },
             {
                 bg: 'bg-indigo-300',
                 el: 'bg-indigo-900',
                 text: 'text-indigo-600',
+                clicked: 'bg-indigo-500',
             },
             {
                 bg: 'bg-purple-300',
                 el: 'bg-purple-900',
                 text: 'text-purple-600',
+                clicked: 'bg-purple-500',
             },
-            { bg: 'bg-pink-300', el: 'bg-pink-900', text: 'text-pink-600' },
+            {
+                bg: 'bg-pink-300',
+                el: 'bg-pink-900',
+                text: 'text-pink-600',
+                clicked: 'bg-pink-500',
+            },
         ];
 
         const randomPair =
@@ -127,6 +150,7 @@ const Counter = () => {
                 </div>
                 <div className="flex flex-col items-center w-full">
                     <Button
+                        showShadow={false}
                         className="flex items-center justify-center w-16 h-16 mb-4 p-4"
                         action={resetCount}
                     >
@@ -136,7 +160,7 @@ const Counter = () => {
                         <div className="w-full sm:w-1/2 lg:w-1/4">
                             <Button
                                 disabled={count < 1 ? true : false}
-                                className={`w-full h-24 font-thin !text-6xl p-4 ${colours.el} ${colours.text} font-semibold rounded-md`}
+                                className={`w-full h-24 !text-6xl p-4 ${colours.el} ${colours.text} font-semibold rounded-md active:bg-${colours.clicked}`}
                                 action={handleDecrement}
                             >
                                 <span className="flex items-center justify-center mb-1">
@@ -146,7 +170,7 @@ const Counter = () => {
                         </div>
                         <div className="w-full sm:w-1/2 lg:w-1/4">
                             <Button
-                                className={`${colours.el} ${colours.text} w-full h-24 font-thin !text-6xl p-4 font-semibold rounded-md`}
+                                className={`${colours.el} ${colours.text} w-full h-24 !text-6xl p-4 font-semibold rounded-md active:bg-${colours.clicked}`}
                                 action={handleIncrement}
                             >
                                 <span className="flex items-center justify-center mb-1">

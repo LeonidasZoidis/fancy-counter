@@ -1,31 +1,36 @@
-import { CSSProperties, ReactNode } from 'react';
+// src/components/Button/Button.tsx
+import React, { CSSProperties, ReactNode } from 'react';
+import styles from './Button.module.css';
 
 interface ButtonProps {
     action: () => void;
     children?: ReactNode;
     className?: string;
-    disabled?: true | false;
+    disabled?: boolean;
     style?: CSSProperties;
+    showShadow?: boolean;
 }
-const ButtonMaterial = ({
+
+const Button: React.FC<ButtonProps> = ({
     action,
     children,
-    className,
+    className = '',
     disabled = false,
     style,
-}: ButtonProps) => {
+    showShadow = true,
+}) => {
     return (
-        <>
-            <button
-                style={style}
-                disabled={disabled}
-                className={`${className}`}
-                onClick={action}
-            >
-                {children}
-            </button>
-        </>
+        <button
+            style={style}
+            disabled={disabled}
+            className={`${styles.pushable} ${className}`}
+            onClick={action}
+        >
+            {showShadow && <span className={styles.shadow}></span>}
+            <span className={styles.edge}></span>
+            <span className={styles.front}>{children}</span>
+        </button>
     );
 };
 
-export default ButtonMaterial;
+export default Button;
