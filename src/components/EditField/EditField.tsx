@@ -27,8 +27,11 @@ const EditField = ({ text = 'Your title', className }: EditFieldProps) => {
     return (
         <>
             <div className="flex gap-4 items-center align-middle">
-                <div className="flex">
-                    <h1 className={`bg-lime-300 text-center ${className}`}>
+                <div className="flex items-center w-full">
+                    <h1
+                        style={{ wordBreak: 'break-all' }}
+                        className={`bg-lime-300 text-center break-words w-full break-all${className}`}
+                    >
                         {title}
                     </h1>
                 </div>

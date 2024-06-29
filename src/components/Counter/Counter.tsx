@@ -65,7 +65,7 @@ const Counter = () => {
         <>
             <div className="flex flex-col justify-between items-center h-screen bg-lime-300">
                 <h1 className="text-center text-4xl font-medium text-lime-700 my-8">
-                    <EditField />
+                    <EditField className="break-words" />
                 </h1>
                 <div className="flex flex-col items-center justify-center flex-grow">
                     <div
