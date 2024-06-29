@@ -51,7 +51,7 @@ const Counter = () => {
         setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
     };
     const resetCount = () => {
-        if (confirm('Are you sure you want to rest your counter?')) {
+        if (confirm('Are you sure you want to reset your counter?')) {
             clickSoundReset.current.currentTime = 0;
             clickSoundReset.current.play().catch((error) => {
                 console.log(error);
