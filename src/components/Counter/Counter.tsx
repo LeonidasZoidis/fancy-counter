@@ -63,7 +63,7 @@ const Counter = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-between items-center h-screen bg-lime-300">
+            <div className="flex flex-col justify-between items-center min-h-screen overflow-hidden bg-lime-300">
                 <h1 className="text-center text-4xl font-medium text-lime-700 my-8">
                     <EditField className="break-words" />
                 </h1>
@@ -77,17 +77,17 @@ const Counter = () => {
                 </div>
                 <div className="flex flex-col items-center w-full">
                     <Button
-                        className="flex items-center justify-center w-16 h-16 mb-4"
+                        className="flex items-center justify-center w-16 h-16 mb-4 p-4"
                         variant="text"
                         action={resetCount}
                     >
                         <RxReset className="!text-6xl text-lime-600" />
                     </Button>
-                    <div className="flex items-center justify-center gap-3 my-8 w-full h-auto">
+                    <div className="flex items-center justify-center gap-3 my-8 w-full h-auto px-4">
                         <div className="w-full sm:w-1/2 lg:w-1/4">
                             <Button
                                 disabled={count < 1 ? true : false}
-                                className="w-full h-24 font-thin !text-6xl text-yellow-400 !bg-lime-700"
+                                className="w-full h-24 font-thin !text-6xl text-yellow-400 !bg-lime-700 p-4"
                                 action={handleDecrement}
                             >
                                 -
@@ -95,7 +95,7 @@ const Counter = () => {
                         </div>
                         <div className="w-full sm:w-1/2 lg:w-1/4">
                             <Button
-                                className="w-full h-24 font-thin !text-6xl text-yellow-400 !bg-lime-900"
+                                className="w-full h-24 font-thin !text-6xl text-yellow-400 !bg-lime-900 p-4"
                                 action={handleIncrement}
                             >
                                 +
