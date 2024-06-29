@@ -128,7 +128,6 @@ const Counter = () => {
                 <div className="flex flex-col items-center w-full">
                     <Button
                         className="flex items-center justify-center w-16 h-16 mb-4 p-4"
-                        variant="text"
                         action={resetCount}
                     >
                         <RxReset className={`!text-6xl ${colours.text}`} />
