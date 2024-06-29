@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import { RxReset } from 'react-icons/rx';
-import clickSound1 from '../../assets/click-button-140881.mp3';
-import clickSound2 from '../../assets/high-pitch-click-47137.mp3';
+import clickSound1 from '../../assets/click_sound.mp3';
+import clickSound2 from '../../assets/reset_sound.mp3';
 
 const Counter = () => {
     const [count, setCount] = useState<number>(() => {
@@ -13,19 +13,6 @@ const Counter = () => {
     const clickAudio = useRef(new Audio(clickSound1));
     const resetAudio = useRef(new Audio(clickSound2));
 
-    const handleIncrement = () => {
-        clickAudio.current.play();
-        setCount((prevCount) => prevCount + 1);
-    };
-    const handleDecrement = () => {
-        clickAudio.current.play();
-        setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
-    };
-    const resetCount = () => {
-        resetAudio.current.play();
-        setCount(0);
-    };
-
     useEffect(() => {
         localStorage.setItem('storedCount', JSON.stringify(count));
     }, [count]);
@@ -33,7 +20,29 @@ const Counter = () => {
     useEffect(() => {
         clickAudio.current.preload = 'auto';
         resetAudio.current.preload = 'auto';
+        // play and pause to ensure sound loads from the start
+        clickAudio.current.play().then(() => clickAudio.current.pause());
+        resetAudio.current.play().then(() => resetAudio.current.pause());
     }, []);
+
+    const handleIncrement = () => {
+        // reset the audio on new clicks
+        clickAudio.current.currentTime = 0;
+        clickAudio.current.play();
+        setCount((prevCount) => prevCount + 1);
+    };
+    const handleDecrement = () => {
+        // reset the audio on new clicks
+        clickAudio.current.currentTime = 0;
+        clickAudio.current.play();
+        setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+    };
+    const resetCount = () => {
+        // reset the audio on new clicks
+        resetAudio.current.currentTime = 0;
+        resetAudio.current.play();
+        setCount(0);
+    };
 
     return (
         <>
@@ -42,7 +51,10 @@ const Counter = () => {
                     FANCY COUNTER
                 </h1>
                 <div className="flex flex-col items-center justify-center flex-grow">
-                    <div className="text-9xl font-medium text-lime-900">
+                    <div
+                        style={{ fontSize: '15rem' }}
+                        className="font-medium text-lime-900"
+                    >
                         {count}
                     </div>
                 </div>
