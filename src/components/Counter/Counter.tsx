@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Button from '../Button/Button';
 import { RxReset } from 'react-icons/rx';
-import clickSound1 from '../../assets/click_sound.mp3';
-import clickSound2 from '../../assets/reset_sound.mp3';
+import clickSoundUpFile from '../../assets/click_sound_up.mp3';
+import clickSoundDownFile from '../../assets/click_sound_down.mp3';
+import clickSoundResetFile from '../../../src/assets/click_sound_reset.mp3';
+import EditField from '../EditField/EditField';
 
 const Counter = () => {
     const [count, setCount] = useState<number>(() => {
@@ -10,45 +12,60 @@ const Counter = () => {
         return storedCount !== null ? JSON.parse(storedCount) : 0;
     });
 
-    const clickAudio = useRef(new Audio(clickSound1));
-    const resetAudio = useRef(new Audio(clickSound2));
+    const clickSoundUp = useRef<HTMLAudioElement>(new Audio(clickSoundUpFile));
+    const clickSoundDown = useRef<HTMLAudioElement>(
+        new Audio(clickSoundDownFile)
+    );
+    const clickSoundReset = useRef<HTMLAudioElement>(
+        new Audio(clickSoundResetFile)
+    );
 
     useEffect(() => {
         localStorage.setItem('storedCount', JSON.stringify(count));
     }, [count]);
 
     useEffect(() => {
-        clickAudio.current.preload = 'auto';
-        resetAudio.current.preload = 'auto';
-        // play and pause to ensure sound loads from the start
-        clickAudio.current.play().then(() => clickAudio.current.pause());
-        resetAudio.current.play().then(() => resetAudio.current.pause());
+        const sounds = [
+            clickSoundUp.current,
+            clickSoundDown.current,
+            clickSoundReset.current,
+        ];
+        sounds.forEach((sound) => {
+            sound.preload = 'auto';
+        }, []);
     }, []);
 
     const handleIncrement = () => {
         // reset the audio on new clicks
-        clickAudio.current.currentTime = 0;
-        clickAudio.current.play();
+        clickSoundUp.current.currentTime = 0;
+        clickSoundUp.current.play().catch((error) => {
+            console.log(error);
+        });
         setCount((prevCount) => prevCount + 1);
     };
     const handleDecrement = () => {
-        // reset the audio on new clicks
-        clickAudio.current.currentTime = 0;
-        clickAudio.current.play();
+        clickSoundDown.current.currentTime = 0;
+        clickSoundDown.current.play().catch((error) => {
+            console.log(error);
+        });
         setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
     };
     const resetCount = () => {
-        // reset the audio on new clicks
-        resetAudio.current.currentTime = 0;
-        resetAudio.current.play();
-        setCount(0);
+        if (confirm('Are you sure you want to rest your counter?')) {
+            clickSoundReset.current.currentTime = 0;
+            clickSoundReset.current.play().catch((error) => {
+                console.log(error);
+            });
+
+            setCount(0);
+        }
     };
 
     return (
         <>
             <div className="flex flex-col justify-between items-center h-screen bg-lime-300">
                 <h1 className="text-center text-4xl font-medium text-lime-700 my-8">
-                    FANCY COUNTER
+                    <EditField />
                 </h1>
                 <div className="flex flex-col items-center justify-center flex-grow">
                     <div
